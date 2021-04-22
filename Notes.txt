@@ -1,0 +1,13 @@
+
+Brads tutorial       https://www.youtube.com/watch?v=6FOq4cUdH8k
+https://bootswatch.com/
+https://fontawesome.com/account/cdn 
+
+dependencies 
+npm i express bcryptjs passport passport-local express-ejs-layouts mongoose connect-flash express-session
+npm i -D nodemon
+
+"scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"    ====== npm run dev =========
+  }
