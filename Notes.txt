@@ -9,5 +9,98 @@ npm i -D nodemon
 
 "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"    ====== npm run dev =========
+    "dev": "nodemon app.js"    ======** npm run dev **=========
   }
+
+  ------------------for bootswatch, and || bootstrap  connect bootstrap into header----------------------------------------
+    SITE  https://getbootstrap.com/docs/4.2/getting-started/introduction/
+
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+
+
+then
+
+ <!-- bootstrap js above the closing body tag -->
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+-------------------------End bootstrap ---------------------------------------------------------------------
+
+
+=======express.Router() already included in express=================
+
+
+app.js-------------------------------------------
+    const express = require('express')
+    const app = express()
+    const expressLayouts = require('express-ejs-layouts');
+    const mongoose = require('mongoose');
+    const PORT = process.env.PORT || 5000;
+    app.use(express.urlencoded({ extended: false }));
+
+    app.use(expressLayouts);
+    app.set('view engine', 'ejs');
+    app.use('/', require('./routes/index.js'));
+    app.use('/users', require('./routes/users.js'));
+
+    app.listen(PORT, console.log(`Server started on port ${PORT}`));
+---------------------------------------------
+
+then make a folder called routes..
+routes/index.js-----------------------
+    const express = require('express');
+    const router = express.Router();
+
+    router.get('/', (req, res) => {
+    res.render('welcome.ejs')
+    })
+--------------------------------------
+file users.js
+routes/users.js -------------------------
+    const express = require('express');
+    const router = express.Router();
+
+
+    router.get('/login', (req, res) => {
+        res.render('login')
+    })
+    router.get('/register', (req, res) => {
+        res.render('register')
+    })
+ ---------------------------------------- 
+
+=================End express.Router()=====================
+
+
+
+
+
+========= notes on express-ejs-layouts =================
+app.js   
+const expressLayouts = require('express-ejs-layouts');
+app.use(expressLayouts);
+app.set('view engine', 'ejs');
+
+*layout.js, which is a file inside of views, which will have the html boilerplate with  <%- body %> layout.js, 
+    it catches everything from other files like login.js no need for html declaration in them just markup
+    it's basically a landing page for everything
+
+*partials  folder
+    inside of views make a folder called partials.
+    all a partial is, is a piece of markup that we want to put inside another file.
+    make files inside the partials folder and you can use <%- include ("./partials/messages"); %> in a regular file thats inside views then.
+
+
+
+=================================end nots ejs =========================================
